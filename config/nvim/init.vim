@@ -22,6 +22,9 @@ nmap <leader>b :Buffers<CR>
 " Quick-save
 map <leader>w :w<CR>
 
+" Quick Commenting 
+vmap <Leader>' :TComment<CR>
+
 " =============================================================================
 " # PLUGINS
 " =============================================================================
@@ -41,7 +44,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'justinmk/vim-sneak'
 
 " GUI enhancements
-"Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 " Highlights a yank for some while
 Plug 'machakann/vim-highlightedyank'
 " Extends % matcher to operate on matching text. 
@@ -68,15 +71,18 @@ Plug 'dag/vim-fish'
 " http://vimcasts.org/episodes/aligning-text-with-tabular-vim
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-"Plug 'vim-syntastic/syntastic'
 
-Plug 'chriskempson/base16-vim'
+" Colorschemes
 Plug 'ayu-theme/ayu-vim'
-"
 
+" Easy surrounding
 Plug 'tpope/vim-surround'
 
+" Minimal theme
 Plug 'junegunn/goyo.vim'
+
+" Commenting out lines
+Plug 'tomtom/tcomment_vim'
 
 call plug#end()
 
@@ -94,9 +100,8 @@ if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
   " screen does not (yet) support truecolor
   set termguicolors
 endif
+
 set background=dark
-"let base16colorspace=256
-"colorscheme base16-default-dark
 
 set termguicolors     " enable true colors support
 let ayucolor="light"  " for light version of theme
@@ -104,11 +109,7 @@ let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
 "
-
 syntax on
-"hi Normal ctermbg=NONE
-" Brighter comments
-"call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 
 " Plugin settings
 let g:secure_modelines_allowed_items = [
@@ -175,11 +176,10 @@ let g:rust_clip_command = 'pbcopy'
 let g:racer_cmd = "/Users/bmaas/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
-
 let g:rust_fold = 1
-" run commands in termingal
-"let g:cargo_shell_command_runner = '!'
 
+" Some quick bindings
+" TODO: make this based on filetype
 map ,cc :Cbuild<CR>
 map ,ct :Ctest<CR>
 
