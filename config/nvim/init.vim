@@ -1,6 +1,26 @@
 " Fish doesn't play all that well with others
 set shell=/bin/bash
-let mapleader = "\<Space>"
+let mapleader = ";"
+
+" Fast editing of nvim config
+map <Leader>v :e $MYVIMRC<CR>
+" Reloads vimrc after saving but keep cursor position
+if !exists("*ReloadVimrc")
+   fun! ReloadVimrc()
+       let save_cursor = getcurpos()
+       source $MYVIMRC
+       call setpos(".", save_cursor)
+   endfun
+endif
+autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
+
+
+" Fast navigation to files and buffers
+map <Leader>el :e .<CR>
+nmap <leader>b :Buffers<CR>
+
+" Quick-save
+map <leader>w :w<CR>
 
 " =============================================================================
 " # PLUGINS
@@ -8,7 +28,7 @@ let mapleader = "\<Space>"
 " Load vundle
 set nocompatible
 filetype off
-"set rtp+=~/dev/others/base16/templates/vim/
+
 call plug#begin()
 
 " Load plugins
@@ -21,12 +41,17 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'justinmk/vim-sneak'
 
 " GUI enhancements
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
+" Highlights a yank for some while
 Plug 'machakann/vim-highlightedyank'
+" Extends % matcher to operate on matching text. 
 Plug 'andymass/vim-matchup'
 
 " Fuzzy finder
+" Rooter changes the working directory to the project root when you open a
+" file or directory.
 Plug 'airblade/vim-rooter'
+" A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -40,8 +65,18 @@ Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
 "Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
+" http://vimcasts.org/episodes/aligning-text-with-tabular-vim
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+"Plug 'vim-syntastic/syntastic'
+
+Plug 'chriskempson/base16-vim'
+Plug 'ayu-theme/ayu-vim'
+"
+
+Plug 'tpope/vim-surround'
+
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
@@ -60,11 +95,18 @@ if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
   set termguicolors
 endif
 set background=dark
-let base16colorspace=256
-"let g:base16_shell_path="~/dev/others/base16/templates/shell/scripts/"
-"colorscheme base16-gruvbox-dark-hard
+"let base16colorspace=256
+"colorscheme base16-default-dark
+
+set termguicolors     " enable true colors support
+let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
+"
+
 syntax on
-hi Normal ctermbg=NONE
+"hi Normal ctermbg=NONE
 " Brighter comments
 "call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 
@@ -120,12 +162,6 @@ let g:latex_indent_enabled = 1
 let g:latex_fold_envs = 0
 let g:latex_fold_sections = []
 
-" Open hotkeys
-map <C-p> :Files<CR>
-nmap <leader>; :Buffers<CR>
-
-" Quick-save
-nmap <leader>w :w<CR>
 
 " Don't confirm .lvimrc
 let g:localvimrc_ask = 0
@@ -135,10 +171,17 @@ let g:localvimrc_ask = 0
 let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
-let g:rust_clip_command = 'xclip -selection clipboard'
-"let g:racer_cmd = "/usr/bin/racer"
-"let g:racer_experimental_completer = 1
+let g:rust_clip_command = 'pbcopy'
+let g:racer_cmd = "/Users/bmaas/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
+
+let g:rust_fold = 1
+" run commands in termingal
+"let g:cargo_shell_command_runner = '!'
+
+map ,cc :Cbuild<CR>
+map ,ct :Ctest<CR>
 
 " Completion
 " Better display for messages
@@ -253,13 +296,23 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 " # Keyboard shortcuts
 " =============================================================================
 " ; as :
-nnoremap ; :
+" nnoremap ; :
 
 " Ctrl+c and Ctrl+j as Esc
 " Ctrl-j is a little awkward unfortunately:
 " https://github.com/neovim/neovim/issues/5916
 " So we also map Ctrl+k
 inoremap <C-j> <Esc>
+
+nnoremap <C-g> <Esc>
+inoremap <C-g> <Esc>
+vnoremap <C-g> <Esc>
+snoremap <C-g> <Esc>
+xnoremap <C-g> <Esc>
+cnoremap <C-g> <Esc>
+onoremap <C-g> <Esc>
+lnoremap <C-g> <Esc>
+tnoremap <C-g> <Esc>
 
 nnoremap <C-k> <Esc>
 inoremap <C-k> <Esc>
@@ -297,11 +350,11 @@ map L $
 " Neat X clipboard integration
 " ,p will paste clipboard into buffer
 " ,c will copy entire buffer into clipboard
-noremap <leader>p :read !xsel --clipboard --output<cr>
-noremap <leader>c :w !xsel -ib<cr><cr>
+noremap <leader>p :read !pbpaste<cr>
+noremap <leader>c :w !pbcopy<cr><cr>
 
 " <leader>s for Rg search
-noremap <leader>s :Rg
+noremap <leader>s :Rg 
 let g:fzf_layout = { 'down': '~20%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -320,8 +373,17 @@ command! -bang -nargs=? -complete=dir Files
   \                               'options': '--tiebreak=index'}, <bang>0)
 
 
+" Find file relative to project dir
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'FZF' s:find_git_root()
+" Open hotkeys
+map <Leader>f :ProjectFiles<CR>
+
 " Open new file adjacent to current file
-nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+"nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " No arrow keys --- force yourself to use the home row
 " nnoremap <up> <nop>
@@ -332,8 +394,8 @@ nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " inoremap <right> <nop>
 
 " Left and right can switch buffers
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
+"nnoremap <left> :bp<CR>
+"nnoremap <right> :bn<CR>
 
 " Move by line
 nnoremap j gj
