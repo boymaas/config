@@ -14,7 +14,6 @@ if !exists("*ReloadVimrc")
 endif
 autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 
-
 " Fast navigation to files and buffers
 map <Leader>el :e .<CR>
 nmap <leader>b :Buffers<CR>
@@ -24,6 +23,12 @@ map <leader>w :w<CR>
 
 " Quick Commenting 
 vmap <Leader>' :TComment<CR>
+
+" Quik movements between panes
+map <S-Left> <C-w><Left>
+map <S-Right> <C-w><Right>
+map <S-Up> <C-w><Up>
+map <S-Down> <C-w><Down>
 
 " =============================================================================
 " # PLUGINS
@@ -90,6 +95,8 @@ Plug 'junegunn/goyo.vim'
 
 " Commenting out lines
 Plug 'tomtom/tcomment_vim'
+
+Plug 'vim-scripts/paredit.vim'
 
 call plug#end()
 
