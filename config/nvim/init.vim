@@ -15,8 +15,13 @@ endif
 autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 
 " Fast navigation to files and buffers
-map <Leader>el :e .<CR>
+map <Leader>el :e %:p:h<CR>
 nmap <leader>b :Buffers<CR>
+
+
+command! ProjectOpenDir execute 'e ' s:find_git_root()
+map <Leader>pD :ProjectOpenDir<CR>
+
 
 " Quick-save
 map <leader>w :w<CR>
@@ -46,7 +51,7 @@ Plug 'ciaranm/securemodelines'
 " https://editorconfig.org/
 Plug 'editorconfig/editorconfig-vim'
 " https://github.com/justinmk/vim-sneak 
-Plug 'justinmk/vim-sneak'
+"Plug 'justinmk/vim-sneak'
 
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
@@ -79,13 +84,14 @@ Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
 "Plug 'fatih/vim-go'
-Plug 'dag/vim-fish'
+" Plug 'dag/vim-fish'
 " http://vimcasts.org/episodes/aligning-text-with-tabular-vim
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 " Colorschemes
 Plug 'ayu-theme/ayu-vim'
+Plug 'gruvbox-community/gruvbox'
 
 " Easy surrounding
 Plug 'tpope/vim-surround'
@@ -95,8 +101,15 @@ Plug 'junegunn/goyo.vim'
 
 " Commenting out lines
 Plug 'tomtom/tcomment_vim'
+Plug 'ivanov/vim-ipython'
 
-Plug 'vim-scripts/paredit.vim'
+Plug 'kassio/neoterm'
+
+" TODO: look at smartparens alternative
+" Plug 'vim-scripts/paredit.vim'
+
+" Python syntax highlighting
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 call plug#end()
 
@@ -122,6 +135,7 @@ let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
+colorscheme gruvbox
 "
 syntax on
 
@@ -191,15 +205,21 @@ let g:racer_cmd = "/Users/bmaas/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 let g:rust_fold = 1
+let g:cargo_shell_command_runner = '!'
+
 
 " Some quick bindings
 " TODO: make this based on filetype
+
+map <C-l> zz
 map ,cc :Cbuild<CR>
 map ,ct :Ctest<CR>
+map ,ce :Crun<CR>
+map ,cb :Cbench<CR>
 
 " Completion
 " Better display for messages
-set cmdheight=2
+set cmdheight=1
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
@@ -208,6 +228,19 @@ let g:go_play_open_browser = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
 let g:go_bin_path = expand("~/dev/go/bin")
+
+
+" Python settings
+let g:nvim_ipy_perform_mappings = 0
+
+" Terminal Settings
+tmap <Esc> <C-\><C-n>
+tmap <S-Left> <C-\><C-n><C-w><Left>
+tmap <S-Right> <C-\><C-n><C-w><Right>
+tmap <S-Up> <C-\><C-n><C-w><Up>
+tmap <S-Down> <C-\><C-n><C-w><Down>
+
+nnoremap <leader>tl :Tclear<cr>
 
 " =============================================================================
 " # Editor settings
@@ -364,11 +397,11 @@ map L $
 " Neat X clipboard integration
 " ,p will paste clipboard into buffer
 " ,c will copy entire buffer into clipboard
-noremap <leader>p :read !pbpaste<cr>
-noremap <leader>c :w !pbcopy<cr><cr>
+" noremap <leader>p :read !pbpaste<cr>
+" noremap <leader>c :w !pbcopy<cr><cr>
 
 " <leader>s for Rg search
-noremap <leader>s :Rg 
+noremap <leader>pa :Rg 
 let g:fzf_layout = { 'down': '~20%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -476,8 +509,8 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " Use <TAB> for selections ranges.
-" nmap <silent> <TAB> <Plug>(coc-range-select)
-" xmap <silent> <TAB> <Plug>(coc-range-select)
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Find symbol of current document.
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
