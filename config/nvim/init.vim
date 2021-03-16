@@ -1,6 +1,7 @@
 " Fish doesn't play all that well with others
 set shell=/bin/bash
 let mapleader = ";"
+let maplocalleader = ","
 
 " Fast editing of nvim config
 map <Leader>v :e $MYVIMRC<CR>
@@ -16,7 +17,9 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 
 " Fast navigation to files and buffers
 map <Leader>el :e %:p:h<CR>
+map <Leader>lcd :cd %:p:h<CR>
 nmap <leader>b :Buffers<CR>
+
 
 
 command! ProjectOpenDir execute 'e ' s:find_git_root()
@@ -63,7 +66,7 @@ Plug 'andymass/vim-matchup'
 " Fuzzy finder
 " Rooter changes the working directory to the project root when you open a
 " file or directory.
-Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-rooter'
 " A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -89,6 +92,9 @@ Plug 'rhysd/vim-clang-format'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+" Org mode for neovim
+Plug 'jceb/vim-orgmode'
+
 " Colorschemes
 Plug 'ayu-theme/ayu-vim'
 Plug 'gruvbox-community/gruvbox'
@@ -110,6 +116,33 @@ Plug 'kassio/neoterm'
 
 " Python syntax highlighting
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+" Make snippets work with coc-snippet
+Plug 'honza/vim-snippets'
+
+Plug 'tomlion/vim-solidity'
+
+Plug 'vim-test/vim-test'
+
+" TSX
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
+" Clojure
+Plug 'tpope/vim-sexp-mappings-for-regular-people', {'for': 'clojure'}
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'tpope/vim-repeat', {'for': 'clojure'}
+" Plug 'tpope/vim-surround', <== installed above
+" Plug 'liquidz/vim-iced', {'for': 'clojure'}
+
+Plug 'bakpakin/fennel.vim'
+Plug 'Olical/conjure', {'tag': 'v4.9.0'}
+
+" JSX Editing
+Plug 'maxmellon/vim-jsx-pretty'
+
+" Coffeescript
+Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 
@@ -213,7 +246,7 @@ let g:cargo_shell_command_runner = '!'
 
 map <C-l> zz
 map ,cc :Cbuild<CR>
-map ,ct :Ctest<CR>
+map ,ct :Ctest -- --nocapture --test-threads=1<CR>
 map ,ce :Crun<CR>
 map ,cb :Cbench<CR>
 
@@ -282,10 +315,10 @@ set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Use wide tabs
-set shiftwidth=8
-set softtabstop=8
-set tabstop=8
-set noexpandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
 
 " Wrapping options
 set formatoptions=tc " wrap text and comments using textwidth
@@ -397,11 +430,12 @@ map L $
 " Neat X clipboard integration
 " ,p will paste clipboard into buffer
 " ,c will copy entire buffer into clipboard
-" noremap <leader>p :read !pbpaste<cr>
-" noremap <leader>c :w !pbcopy<cr><cr>
+noremap <leader>p :read !pbpaste<cr>
+noremap <leader>c :w !pbcopy<cr><cr>
 
 " <leader>s for Rg search
-noremap <leader>pa :Rg 
+noremap <leader>pa :grep <c-r><c-v>
+
 let g:fzf_layout = { 'down': '~20%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -428,6 +462,9 @@ endfunction
 command! ProjectFiles execute 'FZF' s:find_git_root()
 " Open hotkeys
 map <Leader>f :ProjectFiles<CR>
+
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 
 " Open new file adjacent to current file
 "nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -478,6 +515,10 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+nmap <silent> ]n :cnext<cr>
+nmap <silent> [n :cprev<cr>
+
+
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -510,7 +551,6 @@ omap af <Plug>(coc-funcobj-a)
 
 " Use <TAB> for selections ranges.
 nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Find symbol of current document.
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
@@ -523,6 +563,7 @@ nnoremap <silent> <space>i  :call CocActionAsync('codeAction', '', 'Implement mi
 
 " Show actions available at this location
 nnoremap <silent> <space>a  :CocAction<cr>
+vnoremap <silent> <space>a <Plug>(coc-codeaction-selected)
 
 " Expand snippets on TAB 
 inoremap <silent><expr> <TAB>
@@ -588,6 +629,13 @@ autocmd BufRead *.xlsx.axlsx set filetype=ruby
 
 " Script plugins
 autocmd Filetype html,xml,xsl,php source ~/.config/nvim/scripts/closetag.vim
+
+autocmd Filetype javascript se sw=2
+autocmd Filetype solidity se sw=2
+autocmd Filetype less se sw=2
+
+" Clojure / ClojureScript
+let g:iced_enable_default_key_mappings = v:true
 
 " =============================================================================
 " # Footer
