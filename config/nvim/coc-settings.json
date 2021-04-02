@@ -1,7 +1,7 @@
 {
-  "rust-analyzer.cargo-watch.enable": false,
-  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
-  "rust-analyzer.serverPath": "/usr/local/bin/rust-analyzer",
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro","unlinked-file"],
+  "rust-analyzer.updates.channel": "stable",
+  "rust-analyzer.procMacro.enable": false,
   "languageserver": {
     "ccls": {
       "command": "ccls",

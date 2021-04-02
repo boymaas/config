@@ -17,9 +17,8 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 
 " Fast navigation to files and buffers
 map <Leader>el :e %:p:h<CR>
-map <Leader>lcd :cd %:p:h<CR>
+map <Leader>lcd :lcd %:p:h<CR>
 nmap <leader>b :Buffers<CR>
-
 
 
 command! ProjectOpenDir execute 'e ' s:find_git_root()
@@ -46,6 +45,8 @@ set nocompatible
 filetype off
 
 call plug#begin()
+" Rooring
+Plug 'airblade/vim-rooter'
 
 " Load plugins
 " VIM enhancements
@@ -94,6 +95,9 @@ Plug 'plasticboy/vim-markdown'
 
 " Org mode for neovim
 Plug 'jceb/vim-orgmode'
+
+" Bookmarks
+Plug 'MattesGroeger/vim-bookmarks'
 
 " Colorschemes
 Plug 'ayu-theme/ayu-vim'
@@ -237,8 +241,13 @@ let g:rust_clip_command = 'pbcopy'
 let g:racer_cmd = "/Users/bmaas/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
-let g:rust_fold = 1
+let g:rust_fold = 2
 let g:cargo_shell_command_runner = '!'
+
+" I want the root to be the one that contains the
+" Cargo.toml file
+let g:rooter_cd_cmd = 'lcd'
+let g:rooter_patterns = ['Cargo.toml', '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile']
 
 
 " Some quick bindings
@@ -249,6 +258,15 @@ map ,cc :Cbuild<CR>
 map ,ct :Ctest -- --nocapture --test-threads=1<CR>
 map ,ce :Crun<CR>
 map ,cb :Cbench<CR>
+
+
+nmap <silent> <leader>t  :TestLast<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>T  :TestNearest<CR>
+nmap <silent> <leader>tg :TestVisit<CR>
+
+set shell=/bin/zsh
 
 " Completion
 " Better display for messages
@@ -461,7 +479,8 @@ endfunction
 
 command! ProjectFiles execute 'FZF' s:find_git_root()
 " Open hotkeys
-map <Leader>f :ProjectFiles<CR>
+map <Leader>F :ProjectFiles<CR>
+map <Leader>f :FZF<CR>
 
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
@@ -578,6 +597,10 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" Bookmarks
+let g:bookmark_save_per_working_dir = 0
+let g:bookmark_auto_save = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
