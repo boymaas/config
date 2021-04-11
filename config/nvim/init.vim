@@ -571,18 +571,12 @@ omap af <Plug>(coc-funcobj-a)
 " Use <TAB> for selections ranges.
 nmap <silent> <TAB> <Plug>(coc-range-select)
 
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-
-" Implement methods for trait
-nnoremap <silent> <space>i  :call CocActionAsync('codeAction', '', 'Implement missing members')<cr>
-
 " Show actions available at this location
 nnoremap <silent> <space>a  :CocAction<cr>
 vnoremap <silent> <space>a <Plug>(coc-codeaction-selected)
+
+nmap <leader>qf  <Plug>(coc-fix-current)
+
 
 " Expand snippets on TAB 
 inoremap <silent><expr> <TAB>
@@ -598,9 +592,29 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 
+" Mappings for CoCList
+" " Show all diagnostics.
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
+" " Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" " Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" " Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" " Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+
 " Bookmarks
 let g:bookmark_save_per_working_dir = 0
 let g:bookmark_auto_save = 1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
