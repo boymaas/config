@@ -1,3 +1,5 @@
+" See plugin/ directory for individual setup files
+
 call plug#begin()
 " Rooting
 Plug 'airblade/vim-rooter'
@@ -18,14 +20,7 @@ Plug 'machakann/vim-highlightedyank'
 " Extends % matcher to operate on matching text. 
 Plug 'andymass/vim-matchup'
 
-" Fuzzy finder
-" Rooter changes the working directory to the project root when you open a
-" file or directory.
-" Plug 'airblade/vim-rooter'
-" A command-line fuzzy finder
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
-
+" Telescope, fzf replacement
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -45,14 +40,12 @@ Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
-"Plug 'fatih/vim-go'
-" Plug 'dag/vim-fish'
+
+" Plug 'fatih/vim-go'
+
 " http://vimcasts.org/episodes/aligning-text-with-tabular-vim
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
-" Org mode for neovim
-Plug 'jceb/vim-orgmode'
 
 " Bookmarks
 Plug 'MattesGroeger/vim-bookmarks'
@@ -61,20 +54,17 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'ayu-theme/ayu-vim'
 Plug 'gruvbox-community/gruvbox'
 
-" Easy surrounding
-Plug 'tpope/vim-surround'
-
 " Minimal theme
 Plug 'junegunn/goyo.vim'
 
+" Easy surrounding
+Plug 'tpope/vim-surround'
+
 " Commenting out lines
 Plug 'tomtom/tcomment_vim'
-Plug 'ivanov/vim-ipython'
 
+" Use same terminal for everythign
 Plug 'kassio/neoterm'
-
-" TODO: look at smartparens alternative
-" Plug 'vim-scripts/paredit.vim'
 
 " Python syntax highlighting
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
@@ -82,8 +72,10 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Make snippets work with coc-snippet
 Plug 'honza/vim-snippets'
 
+" Solidity coding
 Plug 'tomlion/vim-solidity'
 
+" Universal testing 
 Plug 'vim-test/vim-test'
 
 " TSX
@@ -96,7 +88,6 @@ Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'tpope/vim-repeat', {'for': 'clojure'}
 " Plug 'tpope/vim-surround', <== installed above
 " Plug 'liquidz/vim-iced', {'for': 'clojure'}
-
 Plug 'bakpakin/fennel.vim'
 Plug 'Olical/conjure', {'tag': 'v4.9.0'}
 
