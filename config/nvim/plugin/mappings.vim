@@ -2,10 +2,11 @@
 let mapleader = ";"
 let maplocalleader = ","
 
+map <leader><leader> <c-^>
+
 " Fast navigation to files and buffers
 map <Leader>el :e %:p:h<CR>
 map <Leader>lcd :lcd %:p:h<CR>
-nmap <leader>b :Buffers<CR>
 
 " Open project directory
 command! ProjectOpenDir execute 'e ' s:find_git_root()
