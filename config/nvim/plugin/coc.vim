@@ -52,8 +52,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
 
 " Introduce function text object
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -69,8 +67,8 @@ nmap <silent> <TAB> <Plug>(coc-range-select)
 nnoremap <silent> <space>a  :CocAction<cr>
 vnoremap <silent> <space>a <Plug>(coc-codeaction-selected)
 
-nmap <leader>qf  <Plug>(coc-fix-current)
-
+nnoremap <Leader>qf  <Plug>(coc-fix-current)
+nnoremap <Leader>rn  <Plug>(coc-rename)
 
 " Expand snippets on TAB 
 inoremap <silent><expr> <TAB>
