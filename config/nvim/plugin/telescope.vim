@@ -12,8 +12,15 @@ nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_status()<cr>
 
 
 lua << EOF
+require('telescope').load_extension("session-lens");
 require('telescope').setup{
-  defaults = {
+defaults = {
+  -- Mappings
+  mappings = {
+    i = {
+      ["<esc>"] = require('telescope.actions').close,
+      },
+    },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -56,6 +63,8 @@ require('telescope').setup{
     file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+    
 
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker

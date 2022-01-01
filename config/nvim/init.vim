@@ -50,6 +50,10 @@ Plug 'plasticboy/vim-markdown'
 " Bookmarks
 Plug 'MattesGroeger/vim-bookmarks'
 
+" Session
+Plug 'rmagatti/auto-session'
+Plug 'rmagatti/session-lens'
+
 " Colorschemes
 Plug 'ayu-theme/ayu-vim'
 Plug 'gruvbox-community/gruvbox'
