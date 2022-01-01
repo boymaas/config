@@ -14,11 +14,14 @@ Plug 'editorconfig/editorconfig-vim'
 "Plug 'justinmk/vim-sneak'
 
 " GUI enhancements
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 " Highlights a yank for some while
 Plug 'machakann/vim-highlightedyank'
 " Extends % matcher to operate on matching text. 
 Plug 'andymass/vim-matchup'
+" Status line
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Telescope, fzf replacement
 Plug 'nvim-lua/popup.nvim'

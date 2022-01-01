@@ -57,3 +57,14 @@ syntax on
 " ,c will copy entire buffer into clipboard
 noremap <leader>p :read !pbpaste<cr>
 noremap <leader>c :w !pbcopy<cr><cr>
+
+
+lua <<EOF
+require('lualine').setup{
+  options = {
+    theme = 'gruvbox_dark',
+  },
+  sections = {lualine_c = {require('auto-session-library').current_session_name}}
+}
+EOF
+
