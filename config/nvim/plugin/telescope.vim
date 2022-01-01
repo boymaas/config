@@ -1,7 +1,7 @@
 nnoremap <leader>f <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>F <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers({sort_lastused=true})<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
@@ -10,9 +10,14 @@ nnoremap <leader>G <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_status()<cr>
 
+nnoremap <leader>p <cmd>lua require('session-lens').search_session()<cr>
 
 lua << EOF
-require('telescope').load_extension("session-lens");
+require('telescope').load_extension("session-lens")
+require('session-lens').setup {
+    path_display={'shorten'},
+}
+
 require('telescope').setup{
 defaults = {
   -- Mappings
@@ -63,8 +68,6 @@ defaults = {
     file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
-    
 
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
