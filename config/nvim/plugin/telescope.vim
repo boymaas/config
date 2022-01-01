@@ -12,11 +12,28 @@ nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_status()<cr>
 
 nnoremap <leader>p <cmd>lua require('session-lens').search_session()<cr>
 
+
+lua << EOF
+local opts = {
+  log_level = 'error',
+  auto_session_enable_last_session = false,
+  auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
+  auto_session_enabled = true,
+  auto_save_enabled = true,
+  auto_restore_enabled = nil,
+  auto_session_suppress_dirs = nil
+}
+
+require('auto-session').setup(opts)
+EOF
+
 lua << EOF
 require('telescope').load_extension("session-lens")
 require('session-lens').setup {
     path_display={'shorten'},
 }
+
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
 require('telescope').setup{
 defaults = {
