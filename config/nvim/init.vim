@@ -34,6 +34,10 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'BurntSushi/ripgrep'
+Plug 'sharkdp/fd'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
