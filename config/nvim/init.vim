@@ -1,5 +1,11 @@
 " See plugin/ directory for individual setup files
 
+" Leader needs to be set here for all mappings to take
+" nvim initialization orders plugin files alphabetically and
+" then executes them traversing the runtimepath
+let mapleader = ";"
+let maplocalleader = ","
+
 call plug#begin()
 " Rooting
 Plug 'airblade/vim-rooter'

@@ -1,6 +1,3 @@
-" Leaders
-let mapleader = ";"
-let maplocalleader = ","
 
 map <leader><leader> <c-^>
 
