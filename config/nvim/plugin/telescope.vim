@@ -28,11 +28,13 @@ local opts = {
 require('auto-session').setup(opts)
 EOF
 
-lua << EOF
-  require('telescope').load_extension('vim_bookmarks')
-EOF
 
 lua << EOF
+
+-- Bookmark picker
+require('telescope').load_extension('vim_bookmarks')
+
+-- Session stuff
 require('telescope').load_extension("session-lens")
 require('session-lens').setup {
     path_display={'shorten'},
@@ -93,6 +95,25 @@ defaults = {
 
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-  }
+  },
+  pickers = {
+    -- Your special builtin config goes in here
+    buffers = {
+      sort_lastused = true,
+      -- theme = "dropdown",
+      -- previewer = false,
+      mappings = {
+        i = {
+          ["<c-d>"] = require("telescope.actions").delete_buffer,
+          },
+        n = {
+          ["d"] = require("telescope.actions").delete_buffer,
+          }
+        }
+      },
+    }
+
+
+
 }
 EOF
