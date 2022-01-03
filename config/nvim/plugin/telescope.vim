@@ -2,6 +2,7 @@ nnoremap <leader>F <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>f <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers({sort_lastused=true})<cr>
+nnoremap <leader>B <cmd>lua require('telescope').extensions.vim_bookmarks.all()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
@@ -28,6 +29,10 @@ require('auto-session').setup(opts)
 EOF
 
 lua << EOF
+  require('telescope').load_extension('vim_bookmarks')
+EOF
+
+lua << EOF
 require('telescope').load_extension("session-lens")
 require('session-lens').setup {
     path_display={'shorten'},
@@ -40,7 +45,7 @@ defaults = {
   -- Mappings
   mappings = {
     i = {
-      ["<esc>"] = require('telescope.actions').close,
+      -- ["<esc>"] = require('telescope.actions').close,
       },
     },
     vimgrep_arguments = {

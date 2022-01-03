@@ -36,7 +36,11 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'BurntSushi/ripgrep'
 Plug 'sharkdp/fd'
+
+" :TSInstall rust
+" :TSInstall language
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 
 
 " Semantic language support
@@ -63,6 +67,7 @@ Plug 'plasticboy/vim-markdown'
 
 " Bookmarks
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'tom-anders/telescope-vim-bookmarks.nvim'
 
 " Session
 Plug 'rmagatti/auto-session'
