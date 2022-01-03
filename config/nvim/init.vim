@@ -20,8 +20,15 @@ Plug 'machakann/vim-highlightedyank'
 " Extends % matcher to operate on matching text. 
 Plug 'andymass/vim-matchup'
 " Status line
+" Lightline works out of the box
+" Plug 'itchyny/lightline.vim'
+
+" Lualine needs some more attention
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'nvim-lua/lsp-status.nvim'
+
 
 " Telescope, fzf replacement
 Plug 'nvim-lua/popup.nvim'
