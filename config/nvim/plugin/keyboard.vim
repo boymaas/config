@@ -10,15 +10,15 @@
 " So we also map Ctrl+k
 inoremap <C-j> <Esc>
 
-" nnoremap <C-g> <Esc>
-" inoremap <C-g> <Esc>
-" vnoremap <C-g> <Esc>
-" snoremap <C-g> <Esc>
-" xnoremap <C-g> <Esc>
-" cnoremap <C-g> <Esc>
-" onoremap <C-g> <Esc>
-" lnoremap <C-g> <Esc>
-" tnoremap <C-g> <Esc>
+nnoremap <C-g> 1<C-g>
+inoremap <C-g> 1<C-g>
+vnoremap <C-g> 1<C-g>
+snoremap <C-g> 1<C-g>
+xnoremap <C-g> 1<C-g>
+cnoremap <C-g> 1<C-g>
+onoremap <C-g> 1<C-g>
+lnoremap <C-g> 1<C-g>
+tnoremap <C-g> 1<C-g>
 
 nnoremap <C-k> <Esc>
 inoremap <C-k> <Esc>
