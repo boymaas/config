@@ -11,7 +11,7 @@ nnoremap <leader>G <cmd>lua require('telescope.builtin').git_commits()<cr>
 nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_status()<cr>
 
-nnoremap <leader>p <cmd>lua require('session-lens').search_session()<cr>
+" nnoremap <leader>p <cmd>lua require('session-lens').search_session()<cr>
 
 
 lua << EOF

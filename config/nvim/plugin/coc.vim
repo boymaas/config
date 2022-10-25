@@ -64,7 +64,7 @@ omap af <Plug>(coc-funcobj-a)
 " nmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Show actions available at this location
-nnoremap <silent> <space>a  :CocAction<cr>
+nnoremap <silent> <space>a <Plug>(coc-codeaction)
 vnoremap <silent> <space>a <Plug>(coc-codeaction-selected)
 
 nnoremap <Leader>qf  <Plug>(coc-fix-current)
