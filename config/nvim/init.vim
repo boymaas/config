@@ -6,6 +6,8 @@
 let mapleader = ";"
 let maplocalleader = ","
 
+let g:tcomment_maps = 0
+
 call plug#begin()
 " Rooting
 Plug 'airblade/vim-rooter'
@@ -36,6 +38,7 @@ Plug 'nvim-lualine/lualine.nvim'
 " Plug 'nvim-lua/lsp-status.nvim'
 
 
+
 " Telescope, fzf replacement
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -47,10 +50,39 @@ Plug 'sharkdp/fd'
 " :TSInstall language
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-
-
 " Semantic language support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" LSP Config
+
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+
+" LSP Support
+Plug 'simrat39/rust-tools.nvim'
+Plug 'mfussenegger/nvim-dap'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/vim-vsnip'
+
+" Lsp-Progress 
+Plug 'j-hui/fidget.nvim'
+
+" Pretty diagnostics | Trouble
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'folke/trouble.nvim'
+
+
+" Navigation
+Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+Plug 'ray-x/navigator.lua'
+
+Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+
 
 " Install one of these to get everything 
 " working:
