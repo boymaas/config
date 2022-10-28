@@ -112,9 +112,6 @@ return require('packer').startup(function(use)
     end
   })
 
-  -- git commands
-  use 'tpope/vim-fugitive'
-
   -- Gitsigns
   use ({
     'lewis6991/gitsigns.nvim',
@@ -127,7 +124,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
-  use 'junegunn/vim-easy-align'
 
   -- Python formatting
   use "EgZvor/vim-black"
