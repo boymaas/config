@@ -73,19 +73,14 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'j-hui/fidget.nvim'
 
 " Pretty diagnostics | Trouble
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-
-" lua << EOF
-"   require("trouble").setup {
-"     -- your configuration comes here
-"     -- or leave it empty to use the default settings
-"     -- refer to the configuration section below
-"   }
-" EOF
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'folke/trouble.nvim'
 
 
 " Navigation
+Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+Plug 'ray-x/navigator.lua'
+
 Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 
 
