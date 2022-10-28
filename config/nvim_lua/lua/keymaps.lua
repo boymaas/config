@@ -29,10 +29,10 @@ nnoremap("<C-s>", ":w<CR>")
 nnoremap("<C-c>", ":q<CR>")
 
 -- Move around windows (shifted to the right)
-nnoremap("<C-h>", "<C-w>h")
-nnoremap("<C-j>", "<C-w>j")
-nnoremap("<C-k>", "<C-w>k")
-nnoremap("<C-l>", "<C-w>l")
+nnoremap("<S-Left>", "<C-w>h")
+nnoremap("<S-Down>", "<C-w>j")
+nnoremap("<S-Up>", "<C-w>k")
+nnoremap("<S-Right>", "<C-w>l")
 
 -- Switch buffers (needs nvim-bufferline)
 nnoremap("<TAB>", ":BufferLineCycleNext<CR>")
@@ -69,33 +69,18 @@ vnoremap("<leader><C-v>", '"+p')
 nnoremap("<leader>nh", ":nohlsearch<CR>")
 vnoremap("<leader>nh", ":nohlsearch<CR>")
 
--- Local list
-nnoremap("<leader>lo", ":lopen<CR>")
-nnoremap("<leader>lc", ":lclose<CR>")
-nnoremap("<C-n>", ":lnext<CR>")
-nnoremap("<C-p>", ":lprev<CR>")
-
--- Quickfix list
-nnoremap("<leader>co", ":copen<CR>")
-nnoremap("<leader>cc", ":cclose<CR>")
-nnoremap("<C-N>", ":cnext<CR>")
-nnoremap("<C-P>", ":cprev<CR>")
-
--- Open file in default application
-nnoremap("<leader>xo", "<Cmd> !xdg-open %<CR><CR>")
-
 -- Fugitive
 nnoremap("<leader>G", ":G<CR>")
 nnoremap("<leader>gh", ":Gclog<CR>")
 
 -- Show line diagnostics
-nnoremap("<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>')
+nnoremap("<leader>dd", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>')
 
 -- Open local diagnostics in local list
-nnoremap("<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
+nnoremap("<leader>dl", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
 
 -- Open all project diagnostics in quickfix list
-nnoremap("<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
+nnoremap("<leader>da", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
 
 -- Telescope
 nnoremap("<leader>ff", "<Cmd>Telescope find_files<CR>")
@@ -105,8 +90,3 @@ nnoremap("<leader>fg", "<Cmd>Telescope live_grep<CR>")
 
 -- File explorer
 nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")  -- NvimTree
--- nnoremap("<leader>e", "<Cmd>RnvimrToggle<CR>")
-
--- EasyAlign
--- xmap("ga", "<cmd>EasyAlign")
--- nmap("ga", "<cmd>EasyAlign")

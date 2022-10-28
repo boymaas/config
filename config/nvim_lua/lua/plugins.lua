@@ -32,8 +32,16 @@ return require('packer').startup(function(use)
     config = function() require('plugins.lspconfig') end
   })
 
+  -- LSP language server installation/uninstallation
+
   use({"williamboman/mason.nvim",
     config = function() require('plugins.mason') end
+  })
+
+  -- FIDGET Langauage server progress
+
+  use({'j-hui/fidget.nvim',
+    config = function() require('plugins.fidget') end
   })
 
   -- Autocomplete
