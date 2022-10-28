@@ -4,10 +4,10 @@ local fn = vim.fn
 local cmd = vim.cmd
 
 -- Boostrap Packer
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone','https://github.com/wbthomason/packer.nvim', install_path})
+  packer_bootstrap = fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
 end
 
 -- Load Packer
@@ -24,7 +24,7 @@ cmd([[
 -- Initialize pluggins
 return require('packer').startup(function(use)
   -- Let Packer manage itself
-  use({'wbthomason/packer.nvim', opt = true})
+  use({ 'wbthomason/packer.nvim', opt = true })
 
   -- LSP server
   use({
@@ -34,15 +34,33 @@ return require('packer').startup(function(use)
 
   -- LSP language server installation/uninstallation
 
-  use({"williamboman/mason.nvim",
+  use({ "williamboman/mason.nvim",
     config = function() require('plugins.mason') end
   })
+  use({
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({})
+    end,
+  })
 
-  -- FIDGET Langauage server progress
+  -- LSP FIDGET Progress
 
-  use({'j-hui/fidget.nvim',
+  use({ 'j-hui/fidget.nvim',
     config = function() require('plugins.fidget') end
   })
+
+  -- LSP Navigation
+  use({
+    'ray-x/navigator.lua',
+    requires = {
+      { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+      { 'neovim/nvim-lspconfig' },
+      { "nvim-treesitter/nvim-treesitter" }
+    },
+    config = function() require('plugins.navigator') end
+  })
+
 
   -- Autocomplete
   use({
@@ -67,7 +85,7 @@ return require('packer').startup(function(use)
   })
 
   -- Snippets
-  use {"L3MON4D3/LuaSnip", config = function() require('plugins.snippets') end}
+  use { "L3MON4D3/LuaSnip", config = function() require('plugins.snippets') end }
   use "rafamadriz/friendly-snippets"
 
   -- Signature help
@@ -76,11 +94,11 @@ return require('packer').startup(function(use)
   -- Telescope
   use({
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/plenary.nvim'}},
+    requires = { { 'nvim-lua/plenary.nvim' } },
     config = function() require('plugins.telescope') end,
   })
 
-  use({'nvim-telescope/telescope-fzf-native.nvim', run ='make'})
+  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
   -- bufferline
   use({
@@ -100,22 +118,22 @@ return require('packer').startup(function(use)
   use({
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function() require('plugins.nvimtree') end,  -- Must add this manually
+    config = function() require('plugins.nvimtree') end, -- Must add this manually
   })
 
   -- Startify
   use({
     'mhinz/vim-startify',
     config = function()
-      local path = vim.fn.stdpath('config')..'/lua/plugins/startify.vim'
-      vim.cmd('source '..path)
+      local path = vim.fn.stdpath('config') .. '/lua/plugins/startify.vim'
+      vim.cmd('source ' .. path)
     end
   })
 
   -- Gitsigns
-  use ({
+  use({
     'lewis6991/gitsigns.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = function() require('plugins.gitsigns') end
   })
 
@@ -133,16 +151,23 @@ return require('packer').startup(function(use)
   -- use  'heavenshell/vim-pydocstring'   -- Overwrites a keymap, need to fix.
   -- use 'bfredl/nvim-ipy'
 
-  -- Markdown
-  use 'godlygeek/tabular'
-  use 'ellisonleao/glow.nvim'
+  -- Rust
+  -- NOTE: handled by navigator
+  -- use({ 'simrat39/rust-tools.nvim',
+  --   requires = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap' },
+  --   config = function() require('plugins.rust-tools') end
+  -- })
 
-  -- TOML Files
-  use 'cespare/vim-toml'
+-- Markdown
+use 'godlygeek/tabular'
+use 'ellisonleao/glow.nvim'
 
-  -- Poetry
-  -- use({'petobens/poet-v',
-  --   config = function()
+-- TOML Files
+use 'cespare/vim-toml'
+
+-- Poetry
+-- use({'petobens/poet-v',
+--   config = function()
   --     local path = vim.fn.stdpath('config')..'/lua/plugins/poet-v.vim'
   --     vim.cmd('source '..path)
   --   end
