@@ -16,6 +16,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- LSP Mappings are defined in `plugins/navigator`
+-- GitSigns are defined in `plugins/gitsigns`
 
 -- kj to normal mode
 inoremap("kj", "<Esc>")

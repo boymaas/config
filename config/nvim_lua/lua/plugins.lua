@@ -57,16 +57,8 @@ return require('packer').startup(function(use)
     end
   })
 
-  -- -- H
-  -- use({
-  --   'neovim/nvim-lspconfig',
-  --   requires = {
-  --     'mason',
-  --     'mason-lspconfig',
-  --     'neodev'
-  --   },
-  --   config = function() require('plugins.lspconfig') end
-  -- })
+  -- LSP Config present in `plugins/lspconfig`
+  -- kept it there to bootstrap neodev. See comments
 
   -- LSP Progress bars
   use({ 'j-hui/fidget.nvim',
