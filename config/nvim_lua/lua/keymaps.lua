@@ -37,6 +37,9 @@ nnoremap("<S-Right>", "<C-w>l")
 -- Switch buffers (needs nvim-bufferline)
 nnoremap("<TAB>", ":BufferLineCycleNext<CR>")
 nnoremap("<S-TAB>", ":BufferLineCyclePrev<CR>")
+nnoremap("<leader><leader>", "<c-^>")
+nnoremap(";;", "<c-^>") -- old habits
+
 
 -- Splits
 nnoremap("<leader>ws", ":split<CR>")
@@ -84,9 +87,14 @@ nnoremap("<leader>da", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
 
 -- Telescope
 nnoremap("<leader>ff", "<Cmd>Telescope find_files<CR>")
-nnoremap("<leader>fhf","<Cmd>Telescope find_files hidden=true<CR>")
+nnoremap(";f", "<Cmd>Telescope find_files<CR>") -- Old habits
+nnoremap("<leader>fhf", "<Cmd>Telescope find_files hidden=true<CR>")
 nnoremap("<leader>fb", "<Cmd>Telescope buffers<CR>")
 nnoremap("<leader>fg", "<Cmd>Telescope live_grep<CR>")
 
 -- File explorer
-nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")  -- NvimTree
+nnoremap("<leader>et", "<Cmd>NvimTreeToggle<CR>") -- NvimTree
+
+-- Navigation
+nnoremap("<leader>el", ":e %:p:h<cr>") -- Go into dir relative to file
+nnoremap(";el", ":e %:p:h<cr>") --

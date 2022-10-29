@@ -26,26 +26,40 @@ return require('packer').startup(function(use)
   -- Let Packer manage itself
   use({ 'wbthomason/packer.nvim', opt = true })
 
-  -- LSP server
-  use({
-    'neovim/nvim-lspconfig',
-    config = function() require('plugins.lspconfig') end
-  })
-
   -- LSP language server installation/uninstallation
-
+  -- NOTE: needs to be before lspconfig
   use({ "williamboman/mason.nvim",
     config = function() require('plugins.mason') end
   })
   use({
     "williamboman/mason-lspconfig.nvim",
+    requires = {
+      'mason',
+    },
     config = function()
-      require("mason-lspconfig").setup({})
+      require("mason-lspconfig").setup()
     end,
   })
 
-  -- LSP FIDGET Progress
+  -- LSP Neodev configures Lua paths
+  -- 1. your Neovim config directory
+  -- 2. your Neovim runtime directory
+  -- 3. any plugin directory (this is an lsp root_dir that contains a /lua directory)
+  use({
+    "folke/neodev.nvim",
+    config = function() require 'neodev'.setup() end
+  })
+  use({
+    'neovim/nvim-lspconfig',
+    requires = {
+      'mason',
+      'mason-lspconfig',
+      'neodev'
+    },
+    config = function() require('plugins.lspconfig') end
+  })
 
+  -- LSP Progress bars
   use({ 'j-hui/fidget.nvim',
     config = function() require('plugins.fidget') end
   })
@@ -60,7 +74,6 @@ return require('packer').startup(function(use)
     },
     config = function() require('plugins.navigator') end
   })
-
 
   -- Autocomplete
   use({
@@ -88,9 +101,6 @@ return require('packer').startup(function(use)
   use { "L3MON4D3/LuaSnip", config = function() require('plugins.snippets') end }
   use "rafamadriz/friendly-snippets"
 
-  -- Signature help
-  use "ray-x/lsp_signature.nvim"
-
   -- Telescope
   use({
     'nvim-telescope/telescope.nvim',
@@ -100,7 +110,7 @@ return require('packer').startup(function(use)
 
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
-  -- bufferline
+  -- Bufferline
   use({
     'akinsho/bufferline.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -108,10 +118,16 @@ return require('packer').startup(function(use)
     event = 'BufWinEnter',
   })
 
-  -- statusline
+  -- Statusline
   use({
     'hoob3rt/lualine.nvim',
     config = function() require('plugins.lualine') end,
+  })
+
+  -- Rooter
+  use({
+    'notjedi/nvim-rooter.lua',
+    config = function() require 'nvim-rooter'.setup() end
   })
 
   -- NvimTree
@@ -158,16 +174,16 @@ return require('packer').startup(function(use)
   --   config = function() require('plugins.rust-tools') end
   -- })
 
--- Markdown
-use 'godlygeek/tabular'
-use 'ellisonleao/glow.nvim'
+  -- Markdown
+  use 'godlygeek/tabular'
+  use 'ellisonleao/glow.nvim'
 
--- TOML Files
-use 'cespare/vim-toml'
+  -- TOML Files
+  use 'cespare/vim-toml'
 
--- Poetry
--- use({'petobens/poet-v',
---   config = function()
+  -- Poetry
+  -- use({'petobens/poet-v',
+  --   config = function()
   --     local path = vim.fn.stdpath('config')..'/lua/plugins/poet-v.vim'
   --     vim.cmd('source '..path)
   --   end
@@ -178,7 +194,7 @@ use 'cespare/vim-toml'
 
   -- note taking with zettelkasten
 
-  -- Themes
+  -- -- Themes
   use 'folke/tokyonight.nvim'
   use 'marko-cerovac/material.nvim'
 

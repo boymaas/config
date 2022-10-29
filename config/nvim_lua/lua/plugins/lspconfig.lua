@@ -1,21 +1,15 @@
-local nvim_lsp = require('lspconfig')
-local utils = require('lsp.utils')
-local common_on_attach = utils.common_on_attach
+local lspconfig = require 'lspconfig'
 
--- add capabilities from nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- lua_language_server
+lspconfig.sumneko_lua.setup({
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = "Replace"
+      }
+    }
+  }
+})
 
--- Enable language servers with common settings
-local servers = { "bashls", "clangd", "pyright", "jsonls", "dockerls" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup({
-    on_attach = common_on_attach,
-    capabilities = capabilities,
-  })
-end
-
-require('lsp.sumneko')
-
--- signature help hover
-require "lsp_signature".setup({})
+-- rust_analuzer
+lspconfig.rust_analyzer.setup({})
