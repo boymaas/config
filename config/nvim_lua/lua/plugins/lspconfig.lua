@@ -14,6 +14,8 @@ lspconfig.sumneko_lua.setup({
 -- NOTE: for some reason neodev does not kick in
 -- on startup. When :source % this file it will
 -- kick in. No clue yet on "why"
+-- https://github.com/ray-x/navigator.lua/issues/238
+--
 
 -- -- rust_analuzer
 -- lspconfig.rust_analyzer.setup({})
