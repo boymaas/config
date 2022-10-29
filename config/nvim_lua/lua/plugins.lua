@@ -24,7 +24,10 @@ cmd([[
 -- Initialize pluggins
 return require('packer').startup(function(use)
   -- Let Packer manage itself
-  use({ 'wbthomason/packer.nvim', opt = true })
+  use({
+    "wbthomason/packer.nvim",
+    opt = true
+  })
 
   -- LSP language server installation/uninstallation
   -- NOTE: needs to be before lspconfig
@@ -41,29 +44,6 @@ return require('packer').startup(function(use)
     end,
   })
 
-  -- LSP Neodev configures Lua paths
-  -- 1. your Neovim config directory
-  -- 2. your Neovim runtime directory
-  -- 3. any plugin directory (this is an lsp root_dir that contains a /lua directory)
-  use({
-    "folke/neodev.nvim",
-    config = function() require 'neodev'.setup() end
-  })
-  use({
-    'neovim/nvim-lspconfig',
-    requires = {
-      'mason',
-      'mason-lspconfig',
-      'neodev'
-    },
-    config = function() require('plugins.lspconfig') end
-  })
-
-  -- LSP Progress bars
-  use({ 'j-hui/fidget.nvim',
-    config = function() require('plugins.fidget') end
-  })
-
   -- LSP Navigation
   use({
     'ray-x/navigator.lua',
@@ -72,7 +52,25 @@ return require('packer').startup(function(use)
       { 'neovim/nvim-lspconfig' },
       { "nvim-treesitter/nvim-treesitter" }
     },
-    config = function() require('plugins.navigator') end
+    config = function()
+      require('plugins.navigator')
+    end
+  })
+
+  -- -- H
+  -- use({
+  --   'neovim/nvim-lspconfig',
+  --   requires = {
+  --     'mason',
+  --     'mason-lspconfig',
+  --     'neodev'
+  --   },
+  --   config = function() require('plugins.lspconfig') end
+  -- })
+
+  -- LSP Progress bars
+  use({ 'j-hui/fidget.nvim',
+    config = function() require('plugins.fidget') end
   })
 
   -- Autocomplete
@@ -163,31 +161,12 @@ return require('packer').startup(function(use)
   use "EgZvor/vim-black"
   use 'jeetsukumaran/vim-python-indent-black'
 
-  -- Python
-  -- use  'heavenshell/vim-pydocstring'   -- Overwrites a keymap, need to fix.
-  -- use 'bfredl/nvim-ipy'
-
-  -- Rust
-  -- NOTE: handled by navigator
-  -- use({ 'simrat39/rust-tools.nvim',
-  --   requires = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap' },
-  --   config = function() require('plugins.rust-tools') end
-  -- })
-
   -- Markdown
   use 'godlygeek/tabular'
   use 'ellisonleao/glow.nvim'
 
   -- TOML Files
   use 'cespare/vim-toml'
-
-  -- Poetry
-  -- use({'petobens/poet-v',
-  --   config = function()
-  --     local path = vim.fn.stdpath('config')..'/lua/plugins/poet-v.vim'
-  --     vim.cmd('source '..path)
-  --   end
-  -- })
 
   -- kitty config syntax-highlight
   use "fladson/vim-kitty"

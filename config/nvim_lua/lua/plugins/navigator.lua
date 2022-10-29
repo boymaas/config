@@ -1,3 +1,6 @@
+-- Easy setup BOTH lspconfig and navigator with one liner.
+-- Navigator covers around 20 most used LSP setup.
+
 -- https://github.com/ray-x/navigator.lua#all-configure-options
 -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator.lua#L14
 require 'navigator'.setup({
@@ -137,4 +140,3 @@ require 'navigator'.setup({
     doc_symbols = ''
   },
 })
-
