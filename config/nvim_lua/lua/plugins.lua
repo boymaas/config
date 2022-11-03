@@ -37,7 +37,7 @@ return require('packer').startup(function(use)
   use({
     "williamboman/mason-lspconfig.nvim",
     requires = {
-      'mason',
+      'williamboman/mason.nvim',
     },
     config = function()
       require("mason-lspconfig").setup()
@@ -149,6 +149,28 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
 
+  -- -- Debugging
+  -- use({ 'mfussenegger/nvim-dap',
+  --   config = function() require('plugins/nvim-dap') end
+  -- })
+
+  -- Rust
+
+  use { "rcarriga/nvim-dap-ui",
+    requires = { "mfussenegger/nvim-dap" },
+    config = function() require('dapui').setup() end
+  }
+  use({ 'simrat39/rust-tools.nvim',
+
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap'
+    },
+    config = function() require('plugins.rust-tools') end
+
+  })
+
   -- Python formatting
   use "EgZvor/vim-black"
   use 'jeetsukumaran/vim-python-indent-black'
@@ -163,7 +185,6 @@ return require('packer').startup(function(use)
   -- kitty config syntax-highlight
   use "fladson/vim-kitty"
 
-  -- note taking with zettelkasten
 
   -- -- Themes
   use 'folke/tokyonight.nvim'

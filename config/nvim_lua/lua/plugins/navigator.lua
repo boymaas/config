@@ -6,6 +6,11 @@
 require 'navigator'.setup({
   mason = true,
   lsp = {
+    -- to play nice with rust-tools
+    -- we will not run rust_analyzer setup from navigator
+    disable_lsp = { "rust_analyzer" },
+    ['neodev'] = { runtime_path = true },
+    --
     code_action = {
       virtual_text_icon = false
     },
