@@ -117,7 +117,11 @@ return require('packer').startup(function(use)
   -- Rooter
   use({
     'notjedi/nvim-rooter.lua',
-    config = function() require 'nvim-rooter'.setup() end
+    config = function()
+      require 'nvim-rooter'.setup({
+        rooter_patterns = { '.git', '.hg', '.svn', 'Cargo.toml' },
+      })
+    end
   })
 
   -- NvimTree

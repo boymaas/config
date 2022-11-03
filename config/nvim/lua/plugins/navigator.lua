@@ -33,7 +33,7 @@ require 'navigator'.setup({
     -- { key = '<Leader>gr', func = require('navigator.reference').reference, desc = 'reference' }, -- reference deprecated
     { mode = 'i', key = '<M-k>', func = vim.lsp.signature_help, desc = 'signature_help' },
     { key = '<c-k>', func = vim.lsp.buf.signature_help, desc = 'signature_help' },
-    { key = 'g0', func = require('navigator.symbols').document_symbols, desc = 'document_symbols' },
+    { key = '<Leader>o', func = require('navigator.symbols').document_symbols, desc = 'document_symbols' },
     { key = '<Leader>s', func = require('navigator.workspace').workspace_symbol_live, desc = 'workspace_symbol_live' },
     -- { key = '<c-]>', func = require('navigator.definition').definition, desc = 'definition' },
     { key = 'gd', func = require('navigator.definition').definition, desc = 'definition' },
