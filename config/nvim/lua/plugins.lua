@@ -165,14 +165,12 @@ return require('packer').startup(function(use)
     config = function() require('dapui').setup() end
   }
   use({ 'simrat39/rust-tools.nvim',
-
     requires = {
       'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig',
       'mfussenegger/nvim-dap'
     },
     config = function() require('plugins.rust-tools') end
-
   })
 
   -- Python formatting

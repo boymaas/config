@@ -12,7 +12,6 @@ require('rust-tools').setup({
       require('navigator.codeAction').code_action_prompt(bufnr)
       -- otherwise, you can define your own commands to call navigator functions
     end,
-
     settings = {
       ["rust-analyzer"] = {
         checkOnSave = {
