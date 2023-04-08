@@ -23,6 +23,11 @@ require 'navigator'.setup({
       update_in_insert = false, -- update diagnostic message in insert mode
       severity_sort = { reverse = true },
     },
+    disply_diagnostic_qf = false, -- do not show diagnostic in quickfix on save
+    format_options = {
+      async = false,
+      timeout_ms = 5000
+    }
   },
 
   default_mapping = false,

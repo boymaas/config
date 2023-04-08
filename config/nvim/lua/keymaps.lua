@@ -78,6 +78,9 @@ vnoremap("<leader>nh", ":nohlsearch<CR>")
 nnoremap("<leader>G", ":G<CR>")
 nnoremap("<leader>gh", ":Gclog<CR>")
 
+-- -- Show diagnostics
+-- nnoremap("<leader>d", ':TroubleToggle<CR>')
+
 -- Show line diagnostics
 nnoremap("<leader>dd", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>')
 
@@ -90,6 +93,12 @@ nnoremap("<leader>da", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
 -- Telescope
 nnoremap("<leader>ff", "<Cmd>Telescope find_files<CR>")
 nnoremap(";f", "<Cmd>Telescope find_files<CR>") -- Old habits
+
+nnoremap("<leader>F", "<Cmd>Telescope git_files<CR>")
+nnoremap(";F", "<Cmd>Telescope git_files<CR>") -- Old habits
+
+nnoremap("<leader>fp", "<Cmd>Telescope projects<CR>")
+nnoremap(";p", "<Cmd>Telescope projects<CR>")
 nnoremap("<leader>fhf", "<Cmd>Telescope find_files hidden=true<CR>")
 nnoremap("<leader>fb", "<Cmd>Telescope buffers<CR>")
 nnoremap(";b", "<Cmd>Telescope buffers<CR>") -- Old habits
@@ -101,3 +110,7 @@ nnoremap("<leader>et", "<Cmd>NvimTreeToggle<CR>") -- NvimTree
 -- Navigation
 nnoremap("<leader>el", ":e %:p:h<cr>") -- Go into dir relative to file
 nnoremap(";el", ":e %:p:h<cr>") --
+
+-- Testing
+nnoremap(";t", ":TestLast<cr>") --
+nnoremap(";T", ":TestNearest<cr>") --

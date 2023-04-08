@@ -57,6 +57,20 @@ return require('packer').startup(function(use)
     end
   })
 
+  -- Trouble
+  -- Lua
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
   -- LSP Config present in `plugins/lspconfig`
   -- kept it there to bootstrap neodev. See comments
 
@@ -83,7 +97,9 @@ return require('packer').startup(function(use)
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
-    config = function() require('plugins.treesitter') end,
+    config = function()
+      require('plugins.treesitter')
+    end,
     run = ':TSUpdate'
   })
 
@@ -114,15 +130,62 @@ return require('packer').startup(function(use)
     config = function() require('plugins.lualine') end,
   })
 
-  -- Rooter
-  use({
-    'notjedi/nvim-rooter.lua',
+  -- Rooter / Project
+  use {
+    "ahmedkhalf/project.nvim",
     config = function()
-      require 'nvim-rooter'.setup({
-        rooter_patterns = { '.git', '.hg', '.svn', 'Cargo.toml' },
-      })
+      require("project_nvim").setup {
+        -- Manual mode doesn't automatically change your root directory, so you have
+        -- the option to manually do so using `:ProjectRoot` command.
+        manual_mode = false,
+
+        -- Methods of detecting the root directory. **"lsp"** uses the native neovim
+        -- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
+        -- order matters: if one is not detected, the other is used as fallback. You
+        -- can also delete or rearangne the detection methods.
+        detection_methods = {  "pattern", "lsp" },
+
+        -- All the patterns used to detect root dir, when **"pattern"** is in
+        -- detection_methods
+        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "Cargo.toml" },
+
+        -- Table of lsp clients to ignore by name
+        -- eg: { "efm", ... }
+        ignore_lsp = {},
+
+        -- Don't calculate root dir on specific directories
+        -- Ex: { "~/.cargo/*", ... }
+        exclude_dirs = {},
+
+        -- Show hidden files in telescope
+        show_hidden = false,
+
+        -- When set to false, you will get a message when project.nvim changes your
+        -- directory.
+        silent_chdir = true,
+
+        -- What scope to change the directory, valid options are
+        -- * global (default)
+        -- * tab
+        -- * win
+        scope_chdir = 'global',
+
+        -- Path where project.nvim will store the project history for use in
+        -- telescope
+        datapath = vim.fn.stdpath("data"),
+      }
     end
-  })
+  }
+
+  -- This is now obsolete
+  -- use({
+  --   'notjedi/nvim-rooter.lua',
+  --   config = function()
+  --     require 'nvim-rooter'.setup({
+  --       rooter_patterns = { '.git', '.hg', '.svn', 'Cargo.toml' },
+  --     })
+  --   end
+  -- })
 
   -- NvimTree
   use({
@@ -187,6 +250,38 @@ return require('packer').startup(function(use)
   -- kitty config syntax-highlight
   use "fladson/vim-kitty"
 
+  -- github co-pilot
+  use "github/copilot.vim"
+
+  -- Testing
+  use {
+    "klen/nvim-test",
+    config = function()
+      require('nvim-test').setup()
+    end
+  }
+
+  -- org mode
+  use {
+    'nvim-orgmode/orgmode',
+    requires = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require('orgmode').setup_ts_grammar()
+      require('orgmode').setup {
+        org_agenda_files = { '~/GoogleDrive/My Drive/OrgFiles/*' },
+        org_default_notes_file = '~/GoogleDrive/My Drive/OrgFiles/refile.org',
+      }
+    end
+  }
+
+  -- chat gpt
+  use({ 'dpayne/CodeGPT.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+    },
+    config = function() require('codegpt.config') end
+  })
 
   -- -- Themes
   use 'folke/tokyonight.nvim'

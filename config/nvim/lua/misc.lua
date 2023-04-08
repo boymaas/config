@@ -16,7 +16,8 @@ vim.cmd [[
 
 -- Autoformat on save
 
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+-- NOTE: is already enabled by navigator, but sometimes not working
+-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- CTRL-I Fix ensure jumplist navigation keeps working
 -- https://github.com/neovim/neovim/issues/20126#issuecomment-1243465684

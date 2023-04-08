@@ -1,17 +1,18 @@
 -- Treesitter configuration
 
 require('nvim-treesitter.configs').setup({
-	highlight = { enable = true, additional_vim_regex_highlighting = false},
+  highlight = { enable = true, additional_vim_regex_highlighting = { 'org' } },
   -- We must manually specify which parsers to install
-	ensure_installed = {
+  ensure_installed = {
     "bash",
     "c",
     "cpp",
     "cuda",
-		"json",
+    "json",
     "julia",
-		"lua",
+    "lua",
     "python",
     "yaml",
-	},
+    "org"
+  },
 })
